@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_chatwoot_1697100931831-push-trigger-input-set
+  identifier: Build_chatwoot_1697100931831pushtriggerinputset
+  orgIdentifier: test
+  projectIdentifier: test
+  pipeline:
+    identifier: Build_chatwoot_1697100931831
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
