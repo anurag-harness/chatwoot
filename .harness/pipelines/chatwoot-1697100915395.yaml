@@ -1,0 +1,68 @@
+pipeline:
+  identifier: Build_chatwoot_1697100931831
+  name: Build chatwoot
+  orgIdentifier: test
+  projectIdentifier: test
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github_OAuth_1665526661134
+        repoName: chatwoot
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: npminstall
+                  name: npm_install
+                  spec:
+                    command: npm install
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: npmtest
+                  name: npm_test
+                  spec:
+                    command: npm run test
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: bundleinstall
+                  name: bundle_install
+                  spec:
+                    command: bundle install — jobs=3 — retry=3
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: bundledbcreate
+                  name: bundle_db_create
+                  spec:
+                    command: bundle exec rake db:create
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: bundledbmigrate
+                  name: bundle_db_migrate
+                  spec:
+                    command: bundle exec rake db:migrate
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: bundlerspec
+                  name: bundle_rspec
+                  spec:
+                    command: bundle exec rspec
+                  timeout: ""
+                  type: Run
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Cloud
+        type: CI
