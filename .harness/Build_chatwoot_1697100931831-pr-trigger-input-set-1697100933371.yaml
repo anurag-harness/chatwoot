@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_chatwoot_1697100931831-pr-trigger-input-set
+  identifier: Build_chatwoot_1697100931831prtriggerinputset
+  orgIdentifier: test
+  projectIdentifier: test
+  pipeline:
+    identifier: Build_chatwoot_1697100931831
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
